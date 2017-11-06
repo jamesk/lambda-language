@@ -50,9 +50,10 @@ object Interpreter {
   }
 }
 
-object main extends App {
+object Prelude {
   val ident = Abstraction(Variable("x"), Variable("x"))
   //Natural numbers
+  /*
   val n0 = Abstraction(Variable("f"), Abstraction(Variable("x"), Variable("x")))
   val succ = Abstraction(Variable("n"), Abstraction(Variable("f"), Abstraction(Variable("x"), Application(Variable("f"), Application(Application(Variable("n"), Variable("f")), Variable("x"))))))
   val sub = Abstraction(Variable("m"), Abstraction(Variable("n"), Application(Application(Variable("n"), pred), Variable("m"))))
@@ -65,7 +66,7 @@ object main extends App {
   val n3 = Interpreter.betaNormalForm(Application(succ, n2))
   val n4 = Interpreter.betaNormalForm(Application(succ, n3))
   val n5 = Interpreter.betaNormalForm(Application(succ, n4))
-
+*/
   //Logic
   val truel = Abstraction(Variable("x"), Abstraction(Variable("y"), Variable("x")))
   val falsel = Abstraction(Variable("x"), Abstraction(Variable("y"), Variable("y")))
@@ -75,7 +76,11 @@ object main extends App {
   val ifthenelse = Abstraction(Variable("p"), Abstraction(Variable("a"), Abstraction(Variable("b"), Application(Application(Variable("p"), Variable("a")), Variable("b")))))
   //Logic - numbers
   val iszero = Abstraction(Variable("n"), Application(Application(Variable("n"), Abstraction(Variable("x"), falsel)), truel))
-  val leq = Abstraction(Variable("m"), Abstraction(Variable("n"), Application(iszero, Application(Application(sub, Variable("m")), Variable("n")))))
+  //val leq = Abstraction(Variable("m"), Abstraction(Variable("n"), Application(iszero, Application(Application(sub, Variable("m")), Variable("n")))))
+}
+
+object main extends App {
+  import Prelude._
 
   val trueAndTrue = Application(Application(and, truel), truel)
   val iftruethenident = Application(Application(Application(ifthenelse, truel), ident), falsel)
